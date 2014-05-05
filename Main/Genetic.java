@@ -1,7 +1,6 @@
 package Main;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.Random;
 
 /**
@@ -10,12 +9,14 @@ import java.util.Random;
  * @author Mariusz
  */
 public class Genetic {
-    public static int MIN_EMP_PER_DAYS  = 10;  // minimalna liczba pracownikow obecnych danego dnia   
+    public static int MIN_EMP_PER_DAYS  = 8;  // minimalna liczba pracownikow obecnych danego dnia   
     public static int MIN_WEEK_DAYS     = 3;   // minimalna liczba dni w pracy
     public static int DAYS_SERIES       = 6;   // premiowana liczba dni w pracy pod rzad
     public static int WEEKEND_AT_WORK   = 3;   //co 3 tydzien w pracy
-    public static int MUTATION_PROB     = 2;   //percent
-    public static int C_PARAM           = 1;
+       
+    public static int MUTATION_PROB      = 2;   //procent
+    public static int CROSSOVER_PERCENT  = 35;  //procent elementow podlegajacych krzyzowaniu
+    public static int MUT_UNABLE_PERCENT = 20;  //procent elementow nie podlegajacych mutacji
     
     /**
      * Wyznaczenie podstawowej wyceny kazdego osobnika populacji
@@ -24,24 +25,24 @@ public class Genetic {
     public static void rank(ArrayList<Schedule> population){
         for(Schedule s : population){
             s.rate = 0;
-            //wystarczajaca liczba pracownikow jednego dnia (
+            //wystarczajaca liczba pracownikow jednego dnia
             for(int i = 0; i < s.days; ++i){
                 int num = s.countEmployees(i);
-                if     (num == MIN_EMP_PER_DAYS)     s.rate += 15;
+                if     (num == MIN_EMP_PER_DAYS)     s.rate += 10;
                 else if(num == MIN_EMP_PER_DAYS + 1) s.rate +=  8;
-                else if(num == MIN_EMP_PER_DAYS + 2) s.rate +=  3;  
+                else if(num == MIN_EMP_PER_DAYS + 2) s.rate +=  5;  
                 else if(num <  MIN_EMP_PER_DAYS)     s.rate -= 10;
             }
             
-            //3 dni tygodniowo - nadgodziny to nic dobrego dla pracodawcy ;)
+            //3 dni tygodniowo )
             int days;
             for(int i = 0; i < s.employees; ++i){
-                for(int j = 0; j < (int)((s.days/7)+1); ++j){
+                for(int j = 0; j < (s.days/7)+1; ++j){
                     days = s.countDaysWeek(i, j+1);
-                    if     (days == MIN_WEEK_DAYS)   s.rate += 15;
+                    if     (days == MIN_WEEK_DAYS)   s.rate += 10;
                     else if(days == MIN_WEEK_DAYS-1) s.rate +=  8;
-                    else if(days == MIN_WEEK_DAYS-2) s.rate +=  2; 
-                    else if(days >  MIN_WEEK_DAYS)   s.rate -= 10;
+                    else if(days == MIN_WEEK_DAYS-2) s.rate +=  5; 
+                    else if(days <  MIN_WEEK_DAYS)   s.rate -= 10;
                 }
             }
             
@@ -54,9 +55,9 @@ public class Genetic {
                     else
                         series_length = 0;                    
                 }
-                if     (series_length <= DAYS_SERIES)     s.rate -= 10;
-                else if(series_length == DAYS_SERIES - 1) s.rate -=  8;
-                else if(series_length == DAYS_SERIES - 2) s.rate -=  4;
+                if     (series_length >= DAYS_SERIES)      s.rate -= 10;
+                else if(series_length == DAYS_SERIES - 1)  s.rate -= 8;
+                else if(series_length == DAYS_SERIES - 2)  s.rate -= 4;
             }
                     
             //work every 3rd weekend            
@@ -66,7 +67,7 @@ public class Genetic {
         
  
     /**
-     * Skalowanie sigma funkcji celu (w celu zapobiegania przedwczesnej zbieznosci algorytmu - podobno ma pomagac...)
+     * Skalowanie sigma funkcji celu (w celu zapobiegania przedwczesnej zbieznosci algorytmu)
      * @param population 
      */
     public static void scaleRank(ArrayList<Schedule> population){
@@ -84,99 +85,62 @@ public class Genetic {
         standard_deviation = Math.sqrt(standard_deviation/population.size());
         
         for(Schedule s : population){
-            s.rate = s.rate + (rate_mean - C_PARAM * standard_deviation);
+            s.rate = s.rate + (rate_mean - standard_deviation);
             if(s.rate < 0) s.rate = 0;
         }   
     }
     
     
-    /*===MUTACJA===========================================================================*/
+    /*===MUTATION===========================================================================*/
     
+    /**
+     * Ograniczenie mutacji - mutowane jest tylko (100-MUT_UNABLE_PERCENT)% osobników od końca (najgorszych)
+     * @param population 
+     */
     public static void mutation(ArrayList<Schedule> population){
+
         Random rand = new Random(); 
-        for(Schedule s : population){
-            for(int i = 0; i < s.employees; ++i)
-                for(int j = 0; j < s.days; ++j)
+        
+        int start = (int)(MUT_UNABLE_PERCENT * Main.POP_NUMBER) / 100;
+        Schedule current;
+        
+        for(int index = start; index < population.size(); ++index){
+            current = population.get(index);
+            
+             for(int i = 0; i < current.employees; ++i)
+                for(int j = 0; j < current.days; ++j)
                     if(rand.nextInt(100) < MUTATION_PROB){
-                        s.table[i][j] = !s.table[i][j];
+                        current.table[i][j] = !current.table[i][j];
                     }
         }
-    }
-    
-    /*===SELEKCJA==========================================================================*/
-    
-    /**
-     * Operacja selekcji turniejowej. Wybierana jest tu populacja poddana operatorom genetycznym.
-     * Parametr q (liczba osobnikow poddanych turniejowi) odgornie zostal ustalony na wartosc 2.
-	 * Turniej wygrywa osobnik z wyzszym parametrem rate
-     * @param population Populacja startowa (w obecnym obiegu)
-     * @return 
-     */
-    public static ArrayList<Schedule> preselection(ArrayList<Schedule> population){
-        ArrayList<Schedule> selected = new ArrayList<>();
-        Random rand = new Random();
-        int index1, index2;
-        
-        while(selected.size() != population.size()){
-            index1 = rand.nextInt(population.size()-1);
-            while(true){
-                index2 = rand.nextInt(population.size()-1);
-                if(index1 != index2) break;
-            }
-            if(population.get(index1).rate > population.get(index2).rate)
-                selected.add(new Schedule(population.get(index1)));
-            else
-                selected.add(new Schedule(population.get(index2)));
-        }
-        
-        return selected;
-    }   
-    
-    /**
-     * Operacja sukcesji elitarnej. Dodanie najlepszego osobnika starej populacji do nowej.
-     * Osobnik ten zostaje zamieniony z losowym osobnikiem populacji tymczasowej.
-     * @param temp_pop Populacja poddana operatorom genetycznym w obecnym obiegu petli
-     * @param old_pop Populacja startowa (w obecnym obiegu)
-     * @return Wynikowa populacja powstala po pelnym obiegu petli
-     */
-    public static ArrayList<Schedule> postselection(ArrayList<Schedule> temp_pop, ArrayList<Schedule> old_pop){  // sukcesja elitarna
-        ArrayList<Schedule> new_pop_result = temp_pop;
-        Random rand = new Random();
-        Schedule old_best = old_pop.get(0);
-             
-        for(int i = 1; i < old_pop.size(); ++i){    // wyszukanie najlepszego ze starej populacji
-            if(old_best.rate < old_pop.get(i).rate)
-                old_best = old_pop.get(i);
-        }
-        
-        new_pop_result.set(rand.nextInt(new_pop_result.size()-1), old_best);    // zastapienie losowego elementu najlepszym ze starego zestawu        
-        
-        return new_pop_result;   
-    }
-    
+    }    
     
     /*=== CROSSOVERS:  ==============================================================*/
     
     /**
      * Krzyzowanie jednostajne .
-     * Krzyzuje ze soba pary nastepujacych po sobie osobnikow. 
-     * @param population Populacja tymczasowa (bazowa po preselekcji)
+     * Krzyzuje ze soba pary nastepujacych po sobie (100-CROSSOVER_PERCENT)% osobnikow
+     * @param population
      */
     public static void uniformCrossover(ArrayList<Schedule> population){
-        Iterator<Schedule> iterator = population.iterator();
+        int limit = (int)(CROSSOVER_PERCENT * Main.POP_NUMBER)/100;
         
         Schedule temp1, temp2;
-        while(iterator.hasNext()){
-            temp1 = iterator.next();
+        for(int index = 0; index < population.size()-2; ++index){   
+            if(index == limit)  //krzyzujemy pewna liczbe najlepszych osobnikow (limit)
+                break;
             
-            if(iterator.hasNext()){
-                temp2 = iterator.next();
-                
-                for(int i = 0; i < temp1.table.length; ++i)
-                    singleUniformCross(temp1.table[i], temp2.table[i]);                       
-            }
+            temp1 = new Schedule(population.get(index));
+            temp2 = new Schedule(population.get(index+1));
+            
+            for(int i = 0; i < temp1.table.length; ++i)
+                singleUniformCross(temp1.table[i], temp2.table[i]); 
+            
+            population.set(population.size() - index - 1, temp1);   // podmieniamy je za najgorsze osobniki
+            population.set(population.size() - index - 2, temp2);       
         }
     }
+    
     
     /**
      * Krzyzowanie jednostajne 2 tablic logicznych z prawdopodobienstwem krzyzowania 50%.
@@ -187,7 +151,6 @@ public class Genetic {
     private static void singleUniformCross(boolean[] a, boolean[] b){
         int cross_probability = 50; //procentowo
         Random rand = new Random();
-        //if(a.length != b.length) throw new ArrayIndexOutOfBoundsException();
         
         for(int i = 0; i < a.length; ++i)
             if(rand.nextInt(100) < cross_probability){
