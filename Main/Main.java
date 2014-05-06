@@ -12,14 +12,13 @@ import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
 
-public class Main extends Thread{
+public class Main extends Thread {
 
     public static int POP_NUMBER         = 50;
     public static int EMPLOYEES          = 20;
     public static int DAYS               = 28;
-    public static int ITERATION_BLOCKADE = 5000;
+    public static int ITERATION_BLOCKADE = 3000;
     public static int PLOT_STEP          = 50;
-    public static boolean PAUSE_FLAG     = false;
     public static boolean BREAK_FLAG     = false;
     public static boolean NO_ITER_FLAG   = false;
     public static boolean ENABLED_SCALING = false;
@@ -30,7 +29,7 @@ public class Main extends Thread{
     public void run() {
         ArrayList<Schedule> population = ScheduleFactory.createScheduleTable(EMPLOYEES,DAYS,POP_NUMBER);
         int iteration_number = 0;
-        XYSeries series = new XYSeries("XYGraph");
+        XYSeries series = new XYSeries("Adaptation graph");
 
         JFrame f = new JFrame();
         f.setSize(640,480);
@@ -154,7 +153,7 @@ public class Main extends Thread{
                         "Rating",                   // y-axis Label
                         dataset,                    // Dataset
                         PlotOrientation.VERTICAL,   // Plot Orientation
-                        true,                       // Show Legend
+                        false,                       // Show Legend
                         true,                       // Use tooltips
                         false                       // Configure chart to generate URLs?
                 );

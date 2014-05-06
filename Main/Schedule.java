@@ -103,6 +103,5 @@ public class Schedule implements Comparable<Schedule> {
         if     (rate == o.rate) return  0;
         else if(rate < o.rate)  return  1;
         else                    return -1;
-        
     }
 }

@@ -34,15 +34,15 @@ public class Genetic {
                 else if(num <  MIN_EMP_PER_DAYS)     s.rate -= 10;
             }
             
-            //3 dni tygodniowo )
+            //3 dni tygodniowo
             int days;
             for(int i = 0; i < s.employees; ++i){
                 for(int j = 0; j < (s.days/7)+1; ++j){
                     days = s.countDaysWeek(i, j+1);
                     if     (days == MIN_WEEK_DAYS)   s.rate += 10;
                     else if(days == MIN_WEEK_DAYS-1) s.rate +=  8;
-                    else if(days == MIN_WEEK_DAYS-2) s.rate +=  5; 
-                    else if(days <  MIN_WEEK_DAYS)   s.rate -= 10;
+                    else if(days == MIN_WEEK_DAYS-2) s.rate +=  5;
+                    else if(days >  MIN_WEEK_DAYS)   s.rate -= 10;
                 }
             }
             
@@ -127,7 +127,7 @@ public class Genetic {
         int limit = (CROSSOVER_PERCENT * Main.POP_NUMBER)/100;
         
         Schedule temp1, temp2;
-        for(int index = 0; index < population.size()-2; ++index){   
+        for(int index = 0; index < population.size()-2; index += 2){
             if(index == limit)  //krzyzujemy pewna liczbe najlepszych osobnikow (limit)
                 break;
             
@@ -153,11 +153,12 @@ public class Genetic {
         int cross_probability = 50; //procentowo
         Random rand = new Random();
         
-        for(int i = 0; i < a.length; ++i)
-            if(rand.nextInt(100) < cross_probability){
+        for(int i = 0; i < a.length; ++i) {
+            if (rand.nextInt(100) < cross_probability) {
                 boolean temp = a[i];
                 a[i] = b[i];
                 b[i] = temp;
             }
+        }
     } 
 }

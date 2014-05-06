@@ -470,7 +470,6 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void StartButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_StartButtonActionPerformed
         Main.BREAK_FLAG = false;
-        Main.PAUSE_FLAG = false;
         program = new Thread(new Main());
         program.start();
 
