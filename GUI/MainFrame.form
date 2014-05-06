@@ -25,14 +25,14 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="jTabbedPane1" max="32767" attributes="0"/>
-          <Group type="102" alignment="1" attributes="0">
+          <Group type="102" attributes="0">
               <EmptySpace max="32767" attributes="0"/>
               <Component id="StopButton" min="-2" pref="100" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="StartButton" min="-2" pref="100" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
+          <Component id="jTabbedPane1" alignment="0" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
@@ -73,28 +73,34 @@
                               <Component id="ScaleCheckBox" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                           </Group>
-                          <Group type="102" alignment="0" attributes="0">
+                          <Group type="102" attributes="0">
                               <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                                  <Component id="PopNumLabel" pref="99" max="32767" attributes="0"/>
+                                  <Component id="MutProbLabel" max="32767" attributes="0"/>
+                                  <Component id="CrossLimLabel" max="32767" attributes="0"/>
+                                  <Component id="PopNumLabel" max="32767" attributes="0"/>
                                   <Component id="MutLimLabel" max="32767" attributes="0"/>
                                   <Component id="IterLimitCheckbox" max="32767" attributes="0"/>
                               </Group>
-                              <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="56" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="PopNumSpinner" alignment="1" max="32767" attributes="0"/>
-                                  <Component id="MutLimSpinner" max="32767" attributes="0"/>
-                                  <Component id="IterLimitSpinner" max="32767" attributes="0"/>
-                              </Group>
-                          </Group>
-                          <Group type="102" alignment="1" attributes="0">
-                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="MutProbLabel" max="32767" attributes="0"/>
-                                  <Component id="CrossLimLabel" max="32767" attributes="0"/>
-                              </Group>
-                              <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="CrossLimSpinner" pref="229" max="32767" attributes="0"/>
-                                  <Component id="MutProbSpinner" max="32767" attributes="0"/>
+                                  <Group type="102" attributes="0">
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="CrossLimSpinner" max="32767" attributes="0"/>
+                                          <Component id="MutLimSpinner" alignment="1" max="32767" attributes="0"/>
+                                          <Component id="PopNumSpinner" alignment="1" max="32767" attributes="0"/>
+                                          <Component id="IterLimitSpinner" alignment="1" max="32767" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="jLabel2" alignment="1" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                  </Group>
+                                  <Group type="102" alignment="1" attributes="0">
+                                      <Component id="MutProbSpinner" min="-2" pref="185" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+                                  </Group>
                               </Group>
                           </Group>
                       </Group>
@@ -105,34 +111,37 @@
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace max="-2" attributes="0"/>
+                      <EmptySpace min="-2" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="MutProbLabel" alignment="3" min="-2" pref="26" max="-2" attributes="0"/>
                           <Component id="MutProbSpinner" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabel1" alignment="0" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="CrossLimLabel" alignment="3" min="-2" pref="26" max="-2" attributes="0"/>
                           <Component id="CrossLimSpinner" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabel2" alignment="0" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="MutLimLabel" alignment="3" min="-2" pref="26" max="-2" attributes="0"/>
                           <Component id="MutLimSpinner" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabel3" alignment="3" min="-2" pref="26" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="PopNumLabel" alignment="3" min="-2" pref="20" max="-2" attributes="0"/>
                           <Component id="PopNumSpinner" alignment="3" max="32767" attributes="0"/>
                       </Group>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="IterLimitCheckbox" alignment="3" min="-2" pref="20" max="-2" attributes="0"/>
                           <Component id="IterLimitSpinner" alignment="3" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="ScaleCheckBox" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="38" max="32767" attributes="0"/>
+                      <EmptySpace min="-2" pref="43" max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -145,12 +154,12 @@
             </Component>
             <Component class="javax.swing.JLabel" name="CrossLimLabel">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Crossover limit:"/>
+                <Property name="text" type="java.lang.String" value="Crossover range:"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="MutLimLabel">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Mutation limit:"/>
+                <Property name="text" type="java.lang.String" value="Mutation unabled range:"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="PopNumLabel">
@@ -227,6 +236,21 @@
                 <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="ScaleCheckBoxStateChanged"/>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ScaleCheckBoxActionPerformed"/>
               </Events>
+            </Component>
+            <Component class="javax.swing.JLabel" name="jLabel1">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="%"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="jLabel2">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="%"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="jLabel3">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="%"/>
+              </Properties>
             </Component>
           </SubComponents>
         </Container>

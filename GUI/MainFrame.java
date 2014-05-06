@@ -45,6 +45,9 @@ public class MainFrame extends javax.swing.JFrame {
         CrossLimSpinner = new javax.swing.JSpinner();
         MutLimSpinner = new javax.swing.JSpinner();
         ScaleCheckBox = new javax.swing.JCheckBox();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
         SPanel = new javax.swing.JPanel();
         EmpLabel = new javax.swing.JLabel();
         EmployeesNumberSpinner = new javax.swing.JSpinner();
@@ -65,9 +68,9 @@ public class MainFrame extends javax.swing.JFrame {
 
         MutProbLabel.setText("Mutation probability:");
 
-        CrossLimLabel.setText("Crossover limit:");
+        CrossLimLabel.setText("Crossover range:");
 
-        MutLimLabel.setText("Mutation limit:");
+        MutLimLabel.setText("Mutation unabled range:");
 
         PopNumLabel.setText("Population number:");
 
@@ -132,6 +135,12 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
 
+        jLabel1.setText("%");
+
+        jLabel2.setText("%");
+
+        jLabel3.setText("%");
+
         javax.swing.GroupLayout GPanelLayout = new javax.swing.GroupLayout(GPanel);
         GPanel.setLayout(GPanelLayout);
         GPanelLayout.setHorizontalGroup(
@@ -144,22 +153,27 @@ public class MainFrame extends javax.swing.JFrame {
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(GPanelLayout.createSequentialGroup()
                         .addGroup(GPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(PopNumLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 99, Short.MAX_VALUE)
+                            .addComponent(MutProbLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(CrossLimLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(PopNumLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(MutLimLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(IterLimitCheckbox, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(18, 18, 18)
+                        .addGap(56, 56, 56)
                         .addGroup(GPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(PopNumSpinner, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(MutLimSpinner)
-                            .addComponent(IterLimitSpinner)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, GPanelLayout.createSequentialGroup()
-                        .addGroup(GPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(MutProbLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(CrossLimLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(18, 18, 18)
-                        .addGroup(GPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(CrossLimSpinner, javax.swing.GroupLayout.DEFAULT_SIZE, 229, Short.MAX_VALUE)
-                            .addComponent(MutProbSpinner))))
+                            .addGroup(GPanelLayout.createSequentialGroup()
+                                .addGroup(GPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(CrossLimSpinner)
+                                    .addComponent(MutLimSpinner, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(PopNumSpinner, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(IterLimitSpinner, javax.swing.GroupLayout.Alignment.TRAILING))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(GPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel3)
+                                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING)))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, GPanelLayout.createSequentialGroup()
+                                .addComponent(MutProbSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel1)))))
                 .addContainerGap())
         );
         GPanelLayout.setVerticalGroup(
@@ -168,26 +182,29 @@ public class MainFrame extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(GPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(MutProbLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(MutProbSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(MutProbSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(GPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(CrossLimLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(CrossLimSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(CrossLimSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(GPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(MutLimLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(MutLimSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                    .addComponent(MutLimSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(GPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(PopNumLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(PopNumSpinner))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(GPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(IterLimitCheckbox, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(IterLimitSpinner))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(ScaleCheckBox)
-                .addContainerGap(38, Short.MAX_VALUE))
+                .addGap(43, 43, 43))
         );
 
         jTabbedPane1.addTab("Genetic paremeters", GPanel);
@@ -304,13 +321,13 @@ public class MainFrame extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(StopButton, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(StartButton, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
+            .addComponent(jTabbedPane1)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -427,14 +444,8 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_IterLimitCheckboxActionPerformed
 
     private void IterLimitCheckboxStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_IterLimitCheckboxStateChanged
-        if(IterLimitCheckbox.isSelected()){
-            IterLimitSpinner.setEnabled(true);
-            Main.NO_ITER_FLAG = false;
-        }
-        else{
-            IterLimitSpinner.setEnabled(false);
-            Main.NO_ITER_FLAG = true;
-        }
+            IterLimitSpinner.setEnabled(IterLimitCheckbox.isSelected());
+            Main.NO_ITER_FLAG = !IterLimitCheckbox.isSelected();
     }//GEN-LAST:event_IterLimitCheckboxStateChanged
 
     private void IterLimitSpinnerStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_IterLimitSpinnerStateChanged
@@ -462,6 +473,7 @@ public class MainFrame extends javax.swing.JFrame {
         Main.PAUSE_FLAG = false;
         program = new Thread(new Main());
         program.start();
+
     }//GEN-LAST:event_StartButtonActionPerformed
 
     private void StopButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_StopButtonActionPerformed
@@ -469,7 +481,7 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_StopButtonActionPerformed
 
     private void ScaleCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ScaleCheckBoxActionPerformed
-        Main.ENABLED_SCALING = ScaleCheckBox.isSelected();
+        Main.ENABLED_SCALING = ScaleCheckBox.isSelected();      
     }//GEN-LAST:event_ScaleCheckBoxActionPerformed
 
     private void ScaleCheckBoxStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_ScaleCheckBoxStateChanged
@@ -493,7 +505,7 @@ public class MainFrame extends javax.swing.JFrame {
                     break;
                 }
             }
-        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
+		} catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(MainFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
@@ -532,6 +544,9 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JButton StopButton;
     private javax.swing.JLabel WorkingDaysLabel;
     private javax.swing.JSpinner WorkingDaysSpinner;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JTabbedPane jTabbedPane1;
     // End of variables declaration//GEN-END:variables
 }
