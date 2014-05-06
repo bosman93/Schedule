@@ -469,10 +469,7 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_StopButtonActionPerformed
 
     private void ScaleCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ScaleCheckBoxActionPerformed
-        if(ScaleCheckBox.isSelected())    
-            Main.ENABLED_SCALING = true;
-        else
-            Main.ENABLED_SCALING = false;
+        Main.ENABLED_SCALING = ScaleCheckBox.isSelected();
     }//GEN-LAST:event_ScaleCheckBoxActionPerformed
 
     private void ScaleCheckBoxStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_ScaleCheckBoxStateChanged
@@ -496,13 +493,7 @@ public class MainFrame extends javax.swing.JFrame {
                     break;
                 }
             }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(MainFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(MainFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(MainFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(MainFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
