@@ -37,7 +37,7 @@ public class Schedule implements Comparable<Schedule> {
      * @return 
      */
     public int countDays(int employeeID){
-        if(employeeID >= employees || employeeID < 0) return -1; //zeby nie robic wyjatkow bo to klopotliwe...
+        if(employeeID >= employees || employeeID < 0) return -1;
         
         int counter = 0;
         for(int i = 0; i < days; ++i)
@@ -69,7 +69,7 @@ public class Schedule implements Comparable<Schedule> {
      * @return 
      */
     public int countEmployees(int dayID){
-        if(dayID >= days || dayID < 0) return -1; //zeby nie robic wyjatkow bo to klopotliwe...
+        if(dayID >= days || dayID < 0) return -1; 
         
         int counter = 0;
         for(int i = 0; i < employees; ++i)

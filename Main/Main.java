@@ -28,11 +28,9 @@ public class Main extends Thread{
 
     @Override
     public void run() {
-        ArrayList<Schedule> population = ScheduleFactory.createScheduleTable(EMPLOYEES,DAYS,POP_NUMBER); // :D ta fabryka jest napisana dla jaj w sumie :D nie chcialem tu dodatkowego kodu wiec to dopisalem
-
+        ArrayList<Schedule> population = ScheduleFactory.createScheduleTable(EMPLOYEES,DAYS,POP_NUMBER);
         int iteration_number = 0;
         XYSeries series = new XYSeries("XYGraph");
-
 
         JFrame f = new JFrame();
         f.setSize(640,480);
@@ -40,8 +38,6 @@ public class Main extends Thread{
 
         ChartPanel chPanel = new ChartPanel(null); //creating the chart panel, which extends JPanel
         chPanel.setPreferredSize(new Dimension(640, 480)); //size according to my window
-        
-        
         
         while(true){
             Genetic.rank(population);
@@ -55,21 +51,20 @@ public class Main extends Thread{
                        
             Collections.sort(population);
                                             
-            Genetic.uniformCrossover(population);
-            Genetic.mutation(population);
+            Genetic.uniformCrossover(population);   //crossover for the best schedules in population
+            Genetic.mutation(population);           //mutation for the worst schedules in population
             
             
-            /****Wizualizacja******************************/
+            /****Visualisation******************************/
             Schedule local_best = population.get(0);
             for(Schedule s : population)
                 if(local_best.rate < s.rate)
                     local_best = s;
 
-
-
             series.add(iteration_number,local_best.rate);
             drawPlot(series, f, chPanel,iteration_number);
             /**********************************************/
+            
             iteration_number++;
         }
 
@@ -92,7 +87,8 @@ public class Main extends Thread{
 
         String[] columnNames = new String[best.days+2];
         
-        columnNames[0] = "EMP";
+        // Filling cells in table
+        columnNames[0] = "EMP";     // column titles
         for(int i = 1; i <= best.days; ++i){
             columnNames[i] = "" + i;
         }
@@ -101,7 +97,8 @@ public class Main extends Thread{
 
         Object[][] data = new Object[best.employees+1][best.days+2];
         
-        for(int i = 0; i < best.employees; ++i){
+        // working days
+        for(int i = 0; i < best.employees; ++i){    
          data[i][0] = "Employee " + (i+1);
             for(int j = 0; j < best.days; ++j){
                if(best.table[i][j])
@@ -111,27 +108,28 @@ public class Main extends Thread{
            }
            data[i][best.days+1] = "" + best.countDays(i) + " working days";
         }
+        //statistics
         data[best.employees][0] = "SUMMARY";
-        for(int i = 1; i < best.days; ++i)
-            data[best.employees][i] = "" +best.countEmployees(i-1);
+        for(int i = 0; i < best.days; ++i)
+            data[best.employees][i+1] = "" +best.countEmployees(i);
             
+        // Creating and configuration of new table
         final JTable table = new JTable(data, columnNames);
-        table.setPreferredScrollableViewportSize(new Dimension(500, 150));
-        table.setFillsViewportHeight(true);
         
+        table.setPreferredScrollableViewportSize(new Dimension(500, 150));
+        table.setFillsViewportHeight(true);       
         table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
         table.setPreferredScrollableViewportSize(Toolkit.getDefaultToolkit().getScreenSize());
         
-        int[] columnsWidth = new int[best.days+2];
+        int[] columnsWidth = new int[best.days+2];  //table column width 
         columnsWidth[0] = 100;
         for(int i = 0; i < best.days; ++i)
             columnsWidth[i+1] = 35;
         
         columnsWidth[best.days+1] = 100;
 
-
         int i = 0;
-        for (int width : columnsWidth) {
+        for (int width : columnsWidth) {            
             TableColumn column = table.getColumnModel().getColumn(i++);
             column.setMinWidth(width);
             column.setMaxWidth(width);
@@ -142,30 +140,29 @@ public class Main extends Thread{
         
         //Add the scroll pane to this panel.
         f.add(scrollPane);
-         f.validate();
-        
+        f.validate();    
     }
+    
     static void drawPlot(XYSeries series, JFrame f, ChartPanel chPanel, int iteration_number ){
         if(iteration_number % PLOT_STEP == 0) {
                 XYSeriesCollection dataset = new XYSeriesCollection();
                 dataset.addSeries(series);
                 // Generate the graph
                 JFreeChart chart = ChartFactory.createXYLineChart(
-                        "Adaptation graph", // Title
-                        "Generation", // x-axis Label
-                        "Rating", // y-axis Label
-                        dataset, // Dataset
-                        PlotOrientation.VERTICAL, // Plot Orientation
-                        true, // Show Legend
-                        true, // Use tooltips
-                        false // Configure chart to generate URLs?
+                        "Adaptation graph",         // Title
+                        "Generation",               // x-axis Label
+                        "Rating",                   // y-axis Label
+                        dataset,                    // Dataset
+                        PlotOrientation.VERTICAL,   // Plot Orientation
+                        true,                       // Show Legend
+                        true,                       // Use tooltips
+                        false                       // Configure chart to generate URLs?
                 );
 
                 chPanel.setChart(chart);
                 chPanel.setMouseWheelEnabled(true);
                 f.add(chPanel);
                 f.validate();
-            
             }
     }
 

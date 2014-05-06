@@ -67,6 +67,7 @@ public class Genetic {
         
  
     /**
+     * --wylaczone
      * Skalowanie sigma funkcji celu (w celu zapobiegania przedwczesnej zbieznosci algorytmu)
      * @param population 
      */
@@ -101,7 +102,7 @@ public class Genetic {
 
         Random rand = new Random(); 
         
-        int start = (int)(MUT_UNABLE_PERCENT * Main.POP_NUMBER) / 100;
+        int start = (MUT_UNABLE_PERCENT * Main.POP_NUMBER) / 100;
         Schedule current;
         
         for(int index = start; index < population.size(); ++index){
@@ -123,7 +124,7 @@ public class Genetic {
      * @param population
      */
     public static void uniformCrossover(ArrayList<Schedule> population){
-        int limit = (int)(CROSSOVER_PERCENT * Main.POP_NUMBER)/100;
+        int limit = (CROSSOVER_PERCENT * Main.POP_NUMBER)/100;
         
         Schedule temp1, temp2;
         for(int index = 0; index < population.size()-2; ++index){   

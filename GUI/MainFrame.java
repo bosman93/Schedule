@@ -120,6 +120,7 @@ public class MainFrame extends javax.swing.JFrame {
         });
 
         ScaleCheckBox.setText("Enable Sigma-Scale");
+        ScaleCheckBox.setEnabled(false);
         ScaleCheckBox.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
                 ScaleCheckBoxStateChanged(evt);
@@ -468,11 +469,15 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_StopButtonActionPerformed
 
     private void ScaleCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ScaleCheckBoxActionPerformed
-
+        if(ScaleCheckBox.isSelected())    
+            Main.ENABLED_SCALING = true;
+        else
+            Main.ENABLED_SCALING = false;
     }//GEN-LAST:event_ScaleCheckBoxActionPerformed
 
     private void ScaleCheckBoxStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_ScaleCheckBoxStateChanged
-            Main.ENABLED_SCALING = !Main.ENABLED_SCALING;
+
+            
     }//GEN-LAST:event_ScaleCheckBoxStateChanged
 
     /**

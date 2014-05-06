@@ -221,6 +221,7 @@
             <Component class="javax.swing.JCheckBox" name="ScaleCheckBox">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Enable Sigma-Scale"/>
+                <Property name="enabled" type="boolean" value="false"/>
               </Properties>
               <Events>
                 <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="ScaleCheckBoxStateChanged"/>
