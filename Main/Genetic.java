@@ -15,8 +15,8 @@ public class Genetic {
     public static int WEEKEND_AT_WORK   = 3;   //co 3 tydzien w pracy
        
     public static int MUTATION_PROB      = 2;   //procent
-    public static int CROSSOVER_PERCENT  = 35;  //procent elementow podlegajacych krzyzowaniu
-    public static int MUT_UNABLE_PERCENT = 20;  //procent elementow nie podlegajacych mutacji
+    public static int CROSSOVER_PERCENT  = 35;  //procent najlepszych elementow podlegajacych krzyzowaniu
+    public static int MUT_UNABLE_PERCENT = 20;  //procent najlepszych elementow nie podlegajacych mutacji
     
     /**
      * Wyznaczenie podstawowej wyceny kazdego osobnika populacji
@@ -65,11 +65,11 @@ public class Genetic {
         }  
     }
         
- 
+
     /**
      * --wylaczone
      * Skalowanie sigma funkcji celu (w celu zapobiegania przedwczesnej zbieznosci algorytmu)
-     * @param population 
+     * @param population
      */
     public static void scaleRank(ArrayList<Schedule> population){
         double rate_mean = 0;
