@@ -97,7 +97,11 @@ public class Schedule implements Comparable<Schedule> {
         }
         return str+"\n";
     }
-    
+     /**
+     * Potrzebne do sortowania
+	 * @param o
+	 * @return 
+     */
     @Override
     public int compareTo(Schedule o) {
         if     (rate == o.rate) return  0;

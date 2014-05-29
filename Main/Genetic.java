@@ -9,14 +9,22 @@ import java.util.Random;
  * @author Mariusz
  */
 public class Genetic {
-    public static int MIN_EMP_PER_DAYS  = 8;  // minimalna liczba pracownikow obecnych danego dnia   
+	// Warunki zadania
+    public static int MIN_EMP_PER_DAYS  = 8;   // minimalna liczba pracownikow obecnych danego dnia   
     public static int MIN_WEEK_DAYS     = 3;   // minimalna liczba dni w pracy
     public static int DAYS_SERIES       = 6;   // premiowana liczba dni w pracy pod rzad
-    public static int WEEKEND_AT_WORK   = 3;   //co 3 tydzien w pracy
-       
-    public static int MUTATION_PROB      = 2;   //procent
-    public static int CROSSOVER_PERCENT  = 35;  //procent najlepszych elementow podlegajacych krzyzowaniu
-    public static int MUT_UNABLE_PERCENT = 20;  //procent najlepszych elementow nie podlegajacych mutacji
+    public static int WEEKEND_AT_WORK   = 3;   // co 3 tydzien w pracy
+     
+	// Warunki symulacji
+    public static int CROSSOVER_PERCENT  = 35;  //procent najlepszych chromosomów które będą się krzyzować
+    public static int MUT_UNABLE_PERCENT = 20;  //procent najlepszych chromosomów nie podlegajacych mutacji
+    public static double MUTATION_PROB      = 2;   //prawdopodobieństwo mutacji genu w chromosomie
+    public static double MUTATION_PERCENT   = 2;   //prawdopodobieństwo mutacji chromosomu
+	
+		
+	
+	
+
     
     /**
      * Wyznaczenie podstawowej wyceny kazdego osobnika populacji
@@ -106,14 +114,15 @@ public class Genetic {
         Schedule current;
         
         for(int index = start; index < population.size(); ++index){
-            current = population.get(index);
-            
-             for(int i = 0; i < current.employees; ++i)
-                for(int j = 0; j < current.days; ++j)
-                    if(rand.nextInt(100) < MUTATION_PROB){
-                        current.table[i][j] = !current.table[i][j];
-                    }
-        }
+			if(rand.nextInt(100) < MUTATION_PERCENT){
+				current = population.get(index);
+				for(int i = 0; i < current.employees; ++i)
+					for(int j = 0; j < current.days; ++j)
+						if(rand.nextInt(100) < MUTATION_PROB){
+							current.table[i][j] = !current.table[i][j];
+						}
+			}
+		}
     }    
     
     /*=== CROSSOVERS:  ==============================================================*/
